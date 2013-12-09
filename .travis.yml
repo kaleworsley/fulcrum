@@ -1,6 +1,7 @@
 env:
-  - "DB=mysql"
-  - "DB=postgresql"
+  - "DB=mysql BUNDLE_WITHOUT=postgresql:sqlite"
+  - "DB=postgresql BUNDLE_WITHOUT=mysql:sqlite"
+  - "DB=sqlite BUNDLE_WITHOUT=postgresql:mysql"
 before_script:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"

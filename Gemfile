@@ -14,7 +14,6 @@ gem 'i18n-js'
 gem 'rails-i18n'
 gem 'configuration'
 gem 'rails-observers', '~> 0.1.2'
-# gem 'protected_attributes'
 gem 'jquery-ui-rails'
 
 group :production do
@@ -31,19 +30,14 @@ group :development, :test do
   gem 'database_cleaner'
 end
 
-group :travis do
+group :mysql do
   gem 'mysql2'
 end
 
-if ENV['TRAVIS'] == 'true'
-  group :test do
-    case ENV['DB']
-    when'mysql'
-      gem 'mysql2'
-    when 'postgresql'
-      gem 'pg'
-    else
-      gem 'sqlite3'
-    end
-  end
+group :postgresql do
+  gem 'pg'
+end
+
+group :sqlite do
+  gem 'sqlite3'
 end
