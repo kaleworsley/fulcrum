@@ -7,14 +7,13 @@ gem 'coffee-rails', '~> 4.0.1'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 1.2'
 gem 'ejs'
-gem "compass-rails", "~> 2.0.alpha.0"
+gem "compass-rails"
 gem "devise", "~> 3.2.0"
 gem 'transitions', '0.1.9', :require => ["transitions", "active_record/transitions"]
 gem 'i18n-js'
 gem 'rails-i18n'
 gem 'configuration'
 gem 'rails-observers', '~> 0.1.2'
-# gem 'protected_attributes'
 gem 'jquery-ui-rails'
 
 group :production do
