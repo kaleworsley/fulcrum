@@ -1,23 +1,11 @@
 class StaticController < ApplicationController
-
   class Project
-    extend ActiveModel::Naming
+    extend ActiveModel::Model
 
     attr_accessor :name
 
-    def to_model
-      self
-    end
-
-    def valid?()      true end
-    def new_record?() true end
-    def destroyed?()  true end
-
-    def errors
-      obj = Object.new
-      def obj.[](key)         []  end
-      def obj.full_messages() []  end
-      obj
+    def to_param
+      'testcard'
     end
   end
 
@@ -25,5 +13,4 @@ class StaticController < ApplicationController
     @project = Project.new
     @project.name = 'Testcard Project'
   end
-
 end

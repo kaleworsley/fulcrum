@@ -9,90 +9,98 @@ $(function() {
   project.stories.fetch = function() {};
   window.project = project;
 
-  var done = new Fulcrum.ColumnView({
+
+
+  var doneColumn = new Fulcrum.ColumnView({
     id: 'done', name: '<%= t('.done') %>', el: $('td.done_column'), sortable: false
   }).render();
   $('#column-toggles').append(
-    new Fulcrum.ColumnVisibiltyButtonView({columnView: done}).render().el
+    new Fulcrum.ColumnVisibilityButtonView({columnView: doneColumn}).render().el
   );
 
-  var in_progress = new Fulcrum.ColumnView({
+  var inProgressColumn = new Fulcrum.ColumnView({
     id: 'in_progress', name: '<%= t('.in_progress') %>', el: $('td.in_progress_column'),
     sortable: true
   }).render();
   $('#column-toggles').append(
-    new Fulcrum.ColumnVisibiltyButtonView({columnView: in_progress}).render().el
+    new Fulcrum.ColumnVisibilityButtonView({columnView: inProgressColumn}).render().el
   );
 
-  var backlog = new Fulcrum.ColumnView({
+  var backlogColumn = new Fulcrum.ColumnView({
     id: 'backlog', name: '<%= t('.backlog') %>', el: $('td.backlog_column'), sortable: true
   }).render();
   $('#column-toggles').append(
-    new Fulcrum.ColumnVisibiltyButtonView({columnView: backlog}).render().el
+    new Fulcrum.ColumnVisibilityButtonView({columnView: backlogColumn}).render().el
   );
 
-  var chilly_bin = new Fulcrum.ColumnView({
+  var chillyBinColumn = new Fulcrum.ColumnView({
     id: 'chilly_bin', name: '<%= t('.icebox') %>', el: $('td.chilly_bin_column'),
     sortable: true
   }).render();
   $('#column-toggles').append(
-    new Fulcrum.ColumnVisibiltyButtonView({columnView: chilly_bin}).render().el
+    new Fulcrum.ColumnVisibilityButtonView({columnView: chillyBinColumn, elementId: 'chilly_bin'}).render().el
   );
+
+  // FIXME Move to view
+  // Connect up drag and drop behaviour
+  $('#backlog').sortable('option', 'connectWith', '#chilly_bin,#in_progress');
+  $('#chilly_bin').sortable('option', 'connectWith', '#backlog,#in_progress');
+  $('#in_progress').sortable('option', 'connectWith', '#backlog,#chilly_bin');
 
 
   var view;
-  appendStoryTo(chilly_bin, {"title":"Unestimated feature"});
-  appendStoryTo(chilly_bin, {"title":"Estimated feature","estimate":3});
-  appendStoryTo(chilly_bin, {"title":"Example chore","story_type":"chore"});
-  appendStoryTo(chilly_bin, {"title":"Example bug","story_type":"bug"});
-  appendStoryTo(chilly_bin, {"title":"Example release","story_type":"release"});
+  appendStoryTo(chillyBinColumn, {"title":"Unestimated feature"});
+  appendStoryTo(chillyBinColumn, {"title":"Estimated feature","estimate":3});
+  appendStoryTo(chillyBinColumn, {"title":"Example chore","story_type":"chore"});
+  appendStoryTo(chillyBinColumn, {"title":"Example bug","story_type":"bug"});
+  appendStoryTo(chillyBinColumn, {"title":"Example release","story_type":"release"});
 
-  view = appendStoryTo(chilly_bin, {"title":"Save in progress","estimate":3});
+  view = appendStoryTo(chillyBinColumn, {"title":"Save in progress","estimate":3});
   view.saveInProgress = true;
   view.render();
   view.disableForm();
 
-  appendStoryTo(chilly_bin, {"title":"Editing feature","editing":true});
-  appendStoryTo(chilly_bin, {
+  appendStoryTo(chillyBinColumn, {"title":"Editing feature","editing":true});
+  appendStoryTo(chillyBinColumn, {
     "title":"Editing chore","story_type":"chore","editing":true
   });
-  appendStoryTo(chilly_bin, {
+  appendStoryTo(chillyBinColumn, {
     "title":"Editing bug","story_type":"bug","editing":true
   });
-  appendStoryTo(chilly_bin, {
+  appendStoryTo(chillyBinColumn, {
     "title":"Editing release","story_type":"release","editing":true
   });
 
-  appendStoryTo(backlog, {"title":"Unestimated feature"});
-  appendStoryTo(backlog, {"title":"Estimated feature","estimate":3});
-  appendStoryTo(backlog, {"title":"Example chore","story_type":"chore"});
-  appendStoryTo(backlog, {"title":"Example bug","story_type":"bug"});
-  appendStoryTo(backlog, {"title":"Example release","story_type":"release"});
-  appendStoryTo(backlog, {"title":"Estimated feature","estimate":3});
-  view = appendStoryTo(backlog, {
+  appendStoryTo(backlogColumn, {"title":"Unestimated feature"});
+  appendStoryTo(backlogColumn, {"title":"Estimated feature","estimate":3});
+  appendStoryTo(backlogColumn, {"title":"Example chore","story_type":"chore"});
+  appendStoryTo(backlogColumn, {"title":"Example bug","story_type":"bug"});
+  appendStoryTo(backlogColumn, {"title":"Example release","story_type":"release"});
+  appendStoryTo(backlogColumn, {"title":"Estimated feature","estimate":3});
+  view = appendStoryTo(backlogColumn, {
     "title":"Save in progress","story_type":"release","editing":true
   });
   view.saveInProgress = true;
   view.render();
   view.disableForm();
 
-  appendStoryTo(in_progress, {
+  appendStoryTo(inProgressColumn, {
     "title":"Started feature","state":"started","estimate":1
   });
-  appendStoryTo(in_progress, {
+  appendStoryTo(inProgressColumn, {
     "title":"Finished feature","state":"finished", "estimate":2
   });
-  appendStoryTo(in_progress, {
+  appendStoryTo(inProgressColumn, {
     "title":"Delivered feature","estimate":5, "state":"delivered"
   });
-  appendStoryTo(in_progress, {
+  appendStoryTo(inProgressColumn, {
     "title":"Rejected feature","estimate":8, "state": "rejected"
   });
-  appendStoryTo(in_progress, {"title":"Example chore","story_type":"chore"});
-  appendStoryTo(in_progress, {"title":"Example bug","story_type":"bug"});
-  appendStoryTo(in_progress, {"title":"Example release","story_type":"release"});
+  appendStoryTo(inProgressColumn, {"title":"Example chore","story_type":"chore"});
+  appendStoryTo(inProgressColumn, {"title":"Example bug","story_type":"bug"});
+  appendStoryTo(inProgressColumn, {"title":"Example release","story_type":"release"});
 
-  appendIterationTo(done, new Fulcrum.Iteration({'number':1, stories:[]}));
+  appendIterationTo(doneColumn, new Fulcrum.Iteration({'number':1, stories:[]}));
 
   function appendStoryTo(columnView, storyAttributes, view) {
 
@@ -126,9 +134,11 @@ $(function() {
   window.projectView = new Fulcrum.ProjectView({model: project});
   window.projectView.velocityView = new Fulcrum.ProjectVelocityView({
     model: project, el: $('#velocity')
-  }).render();
+  });
   window.projectView.scaleToViewport();
   $(window).resize(projectView.scaleToViewport);
+  // hack: has to be resized one more time to fit perfectly
+  setTimeout(projectView.scaleToViewport, 100);
 
   window.projectView.notice({
     'title': 'Test card',
@@ -139,9 +149,17 @@ $(function() {
 
 <% content_for :title_bar do %>
   <div id="velocity" class="velocity"></div>
-  <%= render :partial => 'projects/nav',
-             :locals => {:project => @project, :show_column_toggles => true} %>
-             | <a id="add_story" href="#"><%= t('add story') %></a>
+  <div class="project_nav">
+    <%= render :partial => 'projects/nav',
+               :locals => {:project => @project } %>
+               | <a id="add_story" class="btn btn-default" href="#">
+                  <i class="fa fa-plus"></i>
+                  <%= t('add story') %>
+                </a>
+    <div class="column-toggles-wrap">
+      <div id="column-toggles"></div>
+    </div>
+  </div>
 <% end %>
 
 <table class="stories" width="100%">
