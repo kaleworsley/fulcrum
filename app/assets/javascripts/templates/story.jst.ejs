@@ -51,18 +51,7 @@
 
     <% if (story.estimated()) { %>
       <span class="estimate estimate_<%= story.get('estimate') %>">
-        <% if (story.get("estimate") == 1) {  %> |  <% } %>
-        <% if (story.get("estimate") == 2) {  %> ||  <% } %>
-        <% if (story.get("estimate") == 3) {  %> |||  <% } %>
-        <% if (story.get("estimate") == 4) {  %> ||||  <% } %>
-        <% if (story.get("estimate") == 5) {  %> |||||  <% } %>
-        <% if (story.get("estimate") == 6) {  %> ||||||  <% } %>
-        <% if (story.get("estimate") == 7) {  %> |||||||  <% } %>
-        <% if (story.get("estimate") == 8) {  %> ||||||||  <% } %>
-        <% if (story.get("estimate") == 9) {  %> |||||||||  <% } %>
-        <% if (story.get("estimate") == 10) { %> ||||||||||  <% } %>
-        <% if (story.get("estimate") == 11) { %> |||||||||||  <% } %>
-        <% if (story.get("estimate") == 12) { %> ||||||||||||  <% } %>
+        <%= Array(story.get("estimate") + 1).join('|') %>
       </span>
     <% } %>
 
