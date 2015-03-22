@@ -4,6 +4,7 @@
 @import 'jquery_tagit';
 @import 'bootstrap';
 @import 'icons';
+@import 'mixins';
 
 $darkgrey:   #6a7176;           // Header color
 $orange:     rgb(250,182,155);  // Estimate gauge color
@@ -47,59 +48,87 @@ a img {
   border: 0;
 }
 
-#header {
+header {
+  @include clearfix;
   background: #3E6A9E;
   position: relative;
   z-index: 900;
+
+  .logo, .subtitle {
+    display: block;
+    font-size: large;
+    color: white;
+    text-decoration: none;
+    float: left;
+    padding: 0.8em;
+  }
+
+  .logo {
+    background-image: image-url('logo.png');
+    background-repeat: no-repeat;
+    background-position: 13px 6px;
+    padding-left: 50px;
+  }
+
+  .subtitle {
+    padding-left: 0;
+  }
 }
 
-ul#primary-nav {
-  text-align: right;
-  background-image: image-url('logo.png');
-  background-repeat: no-repeat;
-  background-position: 13px 6px;
-  margin: 0;
-  padding: 1em 1em 1em 40px;
-  color: white;
-}
-ul#primary-nav li {
-  padding: 0 0.5em;
-  display: inline;
-}
-ul#primary-nav li a {
-  color: white;
-  text-decoration: none;
-}
-ul#primary-nav li.root {
-  float: left;
-  font-size: large;
-}
-ul#primary-nav li.secondary {
-  position: relative;
-  @include icons-sprite(collapse, false, 0px, 6px);
-  background-color: #333;
-  background-position-x:right;
-  padding: 0.4em 18px 0.4em 0.4em;
-  @include border-radius(5px);
-  text-shadow: black 0 1px 0;
-}
-ul#primary-nav li.secondary ul {
-  visibility: hidden;
-}
-ul#primary-nav li.secondary:hover ul {
-  visibility: visible;
-}
-ul#primary-nav li.secondary ul {
-  padding: 0.3em;
-  position: absolute;
-  left: 0; top: 1.7em;
-  background-color: #333;
-  @include border-radius(0 5px 5px 5px);
-}
-ul#primary-nav li.secondary ul li {
-  white-space: nowrap;
-  text-align: left;
-  display: block;
+header nav {
+  ul {
+    float: right;
+    margin: 0;
+    padding: 0;
+    color: white;
+
+    li {
+      padding: 0 0.5em;
+      display: inline-block;
+    }
+
+    li a {
+      padding: 1.1em;
+      color: white;
+      text-decoration: none;
+      display: inline-block;
+      &:visited, &:hover, &:active {
+        color: white;
+      }
+    }
+
+    li.secondary {
+      position: relative;
+      background-color: #333;
+      background-position-x: right;
+      padding: 0;
+      text-shadow: black 0 1px 0;
+    }
+
+    li.secondary ul {
+      visibility: hidden;
+      padding: 0;
+      margin: 0;
+    }
+
+    li.secondary:hover ul {
+      visibility: visible;
+    }
+
+    li.secondary ul {
+      position: absolute;
+      left: 0; top: 3.5em;
+      background-color: #333;
+    }
+
+    li.secondary ul li {
+      white-space: nowrap;
+      text-align: left;
+      display: block;
+      padding: 0;
+      margin: 0;
+    }
+  }
 }
 
 #title_bar {
