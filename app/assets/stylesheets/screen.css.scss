@@ -189,21 +189,6 @@ header nav {
     float: right;
     margin-right: 10px;
   }
-
-}
-
-.btn.btn-default {
-  background: #999;
-  margin: 0;
-  padding: 0.2em 0.4em;
-  @include border-radius(2px);
-  border: 1px solid #777;
-  cursor: pointer;
-  font-size: small;
-  color: white;
-  text-shadow: none;
-  text-decoration: none;
-  margin: 0 2px;
 }
 
 #title_bar h1 {
@@ -347,8 +332,6 @@ div.story-title abbr.initials {
 .fa-cog {
   color: #5E5C5C;
 }
-
-
 
 #in_progress div.story,
 #backlog div.story,
@@ -512,24 +495,24 @@ ul#projects li:hover {
   background-color: #babdb6;
 }
 
-a.button {
-  background: #efefef;
-  @include background(linear-gradient(top, #efefef, #dfe1e2));
-  @include box-shadow(0 1px 2px #aaaaaa);
-  text-shadow: white 0 1px 0;
-  padding: 5px;
-  @include border-radius(5px);
-  border: 1px solid $darkgrey*1.5;
-  text-decoration: none;
-}
-
-
-
-a.button:hover {
-  @include background(linear-gradient(top, $chameleon-2, $chameleon-3));
+.button, input[type=submit], input[type=button], button {
+  background: #999;
+  margin: 0;
+  padding: 0.2em 0.4em;
+  @include border-radius(2px);
+  border: 1px solid #777;
+  cursor: pointer;
+  font-size: small;
   color: white;
-  text-shadow: $darkgrey 0 1px 0;
+  text-shadow: none;
+  text-decoration: none;
+  margin: 0 2px;
 }
+
+a.button:visited, a.button:active, a.button:active {
+  color: white;
+}
+
 .tags{
   color:$sky-blue-3;
   font-size:84%;
