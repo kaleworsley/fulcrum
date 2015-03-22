@@ -470,17 +470,12 @@ ul#projects {
 }
 
 ul#projects li {
-  background: #efefef;
-  @include background(linear-gradient(top, #efefef, #dfe1e2));
-  @include box-shadow(0 1px 2px #aaaaaa);
-  text-shadow: white 0 1px 0;
-  margin: 10px 0;
-  padding: 10px;
-  border: 1px solid #efefef;
-  border-top: 1px solid #dfe1e2;
-}
-ul#projects li:hover {
-  @include background(linear-gradient(top, darken(#efefef, 10%), darken(#dfe1e2, 10%)));
+  @include border-radius(2px);
+  background: #E9E9E9;
+  border: 1px solid #d5d5d5;
+  color: #5e6469;
+  margin: 0 0 1em;
+  padding: 1em;
 }
 
 ul#projects li h2 {
@@ -489,10 +484,6 @@ ul#projects li h2 {
 
 div.project_options {
   float: right;
-}
-
-ul#projects li:hover {
-  background-color: #babdb6;
 }
 
 .button, input[type=submit], input[type=button], button {
